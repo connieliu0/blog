@@ -45,18 +45,18 @@
 <style>
   .highlight-wrapper {
     position: relative;
-    display: inline-block;
+    display: inline;
   }
 
   .highlight {
     cursor: pointer;
-    display: inline-block;
+    display: inline;
     text-decoration-line: underline;
     text-decoration-style: wavy;
     text-decoration-color: red;
     pointer-events: auto;
     position: relative;
-    z-index: 1;
+    z-index: 2;
   }
 
 

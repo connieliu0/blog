@@ -472,20 +472,20 @@ var app = (function () {
     			span = element("span");
     			t1 = text(/*text*/ ctx[0]);
     			attr_dev(audio_1, "preload", "auto");
-    			if (!src_url_equal(audio_1.src, audio_1_src_value = audioUrl)) attr_dev(audio_1, "src", audio_1_src_value);
+    			if (!src_url_equal(audio_1.src, audio_1_src_value = /*audioUrl*/ ctx[1])) attr_dev(audio_1, "src", audio_1_src_value);
     			audio_1.loop = true;
-    			add_location(audio_1, file$1, 99, 0, 2460);
-    			attr_dev(span, "class", "highlight svelte-18e6fr3");
-    			add_location(span, file$1, 111, 2, 2649);
-    			attr_dev(div, "class", "highlight-wrapper svelte-18e6fr3");
-    			add_location(div, file$1, 106, 0, 2541);
+    			add_location(audio_1, file$1, 100, 0, 2474);
+    			attr_dev(span, "class", "highlight svelte-35yfd0");
+    			add_location(span, file$1, 112, 2, 2663);
+    			attr_dev(div, "class", "highlight-wrapper svelte-35yfd0");
+    			add_location(div, file$1, 107, 0, 2555);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, audio_1, anchor);
-    			/*audio_1_binding*/ ctx[6](audio_1);
+    			/*audio_1_binding*/ ctx[7](audio_1);
     			insert_dev(target, t0, anchor);
     			insert_dev(target, div, anchor);
     			append_dev(div, span);
@@ -493,7 +493,7 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(div, "mouseenter", /*handleMouseEnter*/ ctx[2], false, false, false, false),
+    					listen_dev(div, "mouseenter", /*handleMouseEnter*/ ctx[3], false, false, false, false),
     					listen_dev(div, "mouseleave", handleMouseLeave, false, false, false, false)
     				];
 
@@ -501,13 +501,17 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, [dirty]) {
+    			if (dirty & /*audioUrl*/ 2 && !src_url_equal(audio_1.src, audio_1_src_value = /*audioUrl*/ ctx[1])) {
+    				attr_dev(audio_1, "src", audio_1_src_value);
+    			}
+
     			if (dirty & /*text*/ 1) set_data_dev(t1, /*text*/ ctx[0]);
     		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(audio_1);
-    			/*audio_1_binding*/ ctx[6](null);
+    			/*audio_1_binding*/ ctx[7](null);
     			if (detaching) detach_dev(t0);
     			if (detaching) detach_dev(div);
     			mounted = false;
@@ -548,6 +552,7 @@ var app = (function () {
     	let { imageUrl = 'https://picsum.photos/1200/801' } = $$props;
     	let { color = 'inherit' } = $$props;
     	let { hoverText = '' } = $$props;
+    	let { audioUrl = '' } = $$props;
     	let audio;
 
     	function handleMouseEnter(event) {
@@ -567,7 +572,7 @@ var app = (function () {
     		}
 
     		if (audio) {
-    			$$invalidate(1, audio.currentTime = 0, audio);
+    			$$invalidate(2, audio.currentTime = 0, audio);
     			audio.play().catch(e => console.log('Audio play failed:', e));
     		}
     	}
@@ -578,7 +583,7 @@ var app = (function () {
     		}
     	});
 
-    	const writable_props = ['text', 'imageUrl', 'color', 'hoverText'];
+    	const writable_props = ['text', 'imageUrl', 'color', 'hoverText', 'audioUrl'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1$1.warn(`<Highlight> was created with unknown prop '${key}'`);
@@ -587,15 +592,16 @@ var app = (function () {
     	function audio_1_binding($$value) {
     		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
     			audio = $$value;
-    			$$invalidate(1, audio);
+    			$$invalidate(2, audio);
     		});
     	}
 
     	$$self.$$set = $$props => {
     		if ('text' in $$props) $$invalidate(0, text = $$props.text);
-    		if ('imageUrl' in $$props) $$invalidate(3, imageUrl = $$props.imageUrl);
-    		if ('color' in $$props) $$invalidate(4, color = $$props.color);
-    		if ('hoverText' in $$props) $$invalidate(5, hoverText = $$props.hoverText);
+    		if ('imageUrl' in $$props) $$invalidate(4, imageUrl = $$props.imageUrl);
+    		if ('color' in $$props) $$invalidate(5, color = $$props.color);
+    		if ('hoverText' in $$props) $$invalidate(6, hoverText = $$props.hoverText);
+    		if ('audioUrl' in $$props) $$invalidate(1, audioUrl = $$props.audioUrl);
     	};
 
     	$$self.$capture_state = () => ({
@@ -603,6 +609,7 @@ var app = (function () {
     		imageUrl,
     		color,
     		hoverText,
+    		audioUrl,
     		audio,
     		handleMouseEnter,
     		handleMouseLeave
@@ -610,17 +617,27 @@ var app = (function () {
 
     	$$self.$inject_state = $$props => {
     		if ('text' in $$props) $$invalidate(0, text = $$props.text);
-    		if ('imageUrl' in $$props) $$invalidate(3, imageUrl = $$props.imageUrl);
-    		if ('color' in $$props) $$invalidate(4, color = $$props.color);
-    		if ('hoverText' in $$props) $$invalidate(5, hoverText = $$props.hoverText);
-    		if ('audio' in $$props) $$invalidate(1, audio = $$props.audio);
+    		if ('imageUrl' in $$props) $$invalidate(4, imageUrl = $$props.imageUrl);
+    		if ('color' in $$props) $$invalidate(5, color = $$props.color);
+    		if ('hoverText' in $$props) $$invalidate(6, hoverText = $$props.hoverText);
+    		if ('audioUrl' in $$props) $$invalidate(1, audioUrl = $$props.audioUrl);
+    		if ('audio' in $$props) $$invalidate(2, audio = $$props.audio);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [text, audio, handleMouseEnter, imageUrl, color, hoverText, audio_1_binding];
+    	return [
+    		text,
+    		audioUrl,
+    		audio,
+    		handleMouseEnter,
+    		imageUrl,
+    		color,
+    		hoverText,
+    		audio_1_binding
+    	];
     }
 
     class Highlight extends SvelteComponentDev {
@@ -629,9 +646,10 @@ var app = (function () {
 
     		init(this, options, instance$1, create_fragment$1, safe_not_equal, {
     			text: 0,
-    			imageUrl: 3,
-    			color: 4,
-    			hoverText: 5
+    			imageUrl: 4,
+    			color: 5,
+    			hoverText: 6,
+    			audioUrl: 1
     		});
 
     		dispatch_dev("SvelteRegisterComponent", {
@@ -673,6 +691,14 @@ var app = (function () {
     	set hoverText(value) {
     		throw new Error("<Highlight>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
+
+    	get audioUrl() {
+    		throw new Error("<Highlight>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set audioUrl(value) {
+    		throw new Error("<Highlight>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
     }
 
     /* src/App.svelte generated by Svelte v3.59.2 */
@@ -687,87 +713,86 @@ var app = (function () {
     	let div0;
     	let t0;
     	let div3;
+    	let div2;
     	let p0;
     	let t2;
-    	let div2;
-    	let t3;
     	let highlight0;
+    	let t3;
     	let t4;
-    	let t5;
     	let div5;
     	let div4;
-    	let t6;
+    	let t5;
     	let highlight1;
+    	let t6;
     	let t7;
-    	let t8;
     	let div7;
     	let div6;
-    	let t9;
+    	let t8;
     	let highlight2;
+    	let t9;
     	let t10;
-    	let t11;
     	let div9;
     	let div8;
-    	let t12;
+    	let t11;
     	let highlight3;
+    	let t12;
     	let t13;
-    	let t14;
     	let div11;
     	let div10;
-    	let t15;
+    	let t14;
     	let highlight4;
+    	let t15;
     	let t16;
-    	let t17;
     	let div13;
     	let div12;
-    	let t18;
+    	let t17;
     	let highlight5;
+    	let t18;
     	let t19;
-    	let t20;
     	let div15;
     	let div14;
-    	let t21;
+    	let t20;
     	let highlight6;
+    	let t21;
     	let t22;
-    	let t23;
     	let div17;
     	let div16;
-    	let t24;
+    	let t23;
     	let highlight7;
+    	let t24;
     	let t25;
-    	let t26;
     	let div19;
     	let div18;
-    	let t27;
+    	let t26;
     	let highlight8;
+    	let t27;
     	let t28;
-    	let t29;
     	let div21;
     	let div20;
-    	let t30;
+    	let t29;
     	let highlight9;
+    	let t30;
     	let t31;
-    	let t32;
     	let div23;
     	let div22;
-    	let t33;
+    	let t32;
     	let highlight10;
+    	let t33;
     	let t34;
-    	let t35;
     	let div25;
     	let div24;
-    	let t36;
+    	let t35;
     	let highlight11;
-    	let t37;
+    	let t36;
     	let highlight12;
+    	let t37;
     	let t38;
-    	let t39;
     	let div27;
     	let div26;
     	let p1;
-    	let t40;
+    	let t39;
     	let a;
-    	let t42;
+    	let t41;
     	let current;
 
     	highlight0 = new Highlight({
@@ -904,154 +929,153 @@ var app = (function () {
     			div0 = element("div");
     			t0 = space();
     			div3 = element("div");
+    			div2 = element("div");
     			p0 = element("p");
     			p0.textContent = "Please click on this webpage once to enable the audio effect";
-    			t2 = space();
-    			div2 = element("div");
-    			t3 = text("One night I found myself \n        ");
+    			t2 = text("\n        One night I found myself \n        ");
     			create_component(highlight0.$$.fragment);
-    			t4 = text("\n        to a song from a college indie band whose concert I attended at the basement of the co-op next to mine. \n        to the looping bass, the loose melody and voice of the singer, I felt an indescribable feeling wash over me. \n        Eyes soft, imperceptibly so, reaching for something just beyond my fingertips.");
-    			t5 = space();
+    			t3 = text("\n        to a song from a college indie band whose concert I attended at the basement of the co-op next to mine. \n        to the looping bass, the loose melody and voice of the singer, I felt an indescribable feeling wash over me. \n        Eyes soft, imperceptibly so, reaching for something just beyond my fingertips.");
+    			t4 = space();
     			div5 = element("div");
     			div4 = element("div");
-    			t6 = text("The day prior I had met up with some people from the co-op, the first time this particular group of people had met in three years. An intersection of time - do you think you can be in two places at once? \n        ");
+    			t5 = text("The day prior I had met up with some people from the co-op, the first time this particular group of people had met in three years. An intersection of time - do you think you can be in two places at once? \n        ");
     			create_component(highlight1.$$.fragment);
-    			t7 = text("\n        and you look both ways before crossing.");
-    			t8 = space();
+    			t6 = text("\n        and you look both ways before crossing.");
+    			t7 = space();
     			div7 = element("div");
     			div6 = element("div");
-    			t9 = text("The song traced a bittersweetness in my memory - the lingering desperation I had in college for approval and foolish belief that if I achieved certain goals I would finally become the person I wanted to be without looking any closer. I had \n        ");
+    			t8 = text("The song traced a bittersweetness in my memory - the lingering desperation I had in college for approval and foolish belief that if I achieved certain goals I would finally become the person I wanted to be without looking any closer. I had \n        ");
     			create_component(highlight2.$$.fragment);
-    			t10 = text("\n        as a result. With no one around to witness them, it was if they were never there.");
-    			t11 = space();
+    			t9 = text("\n        as a result. With no one around to witness them, it was if they were never there.");
+    			t10 = space();
     			div9 = element("div");
     			div8 = element("div");
-    			t12 = text("Three years since is so much time, yet so little. I had done so much, yet so little, but at the very least I was slowly becoming myself again. Towards the end of 2023, I made a  \n        ");
+    			t11 = text("Three years since is so much time, yet so little. I had done so much, yet so little, but at the very least I was slowly becoming myself again. Towards the end of 2023, I made a  \n        ");
     			create_component(highlight3.$$.fragment);
-    			t13 = text("\n        as a declaration that I was going to make art and share it and it was going to be bad and inconsistent and unpolished but at the very least! At the very least I was going to try!");
-    			t14 = space();
+    			t12 = text("\n        as a declaration that I was going to make art and share it and it was going to be bad and inconsistent and unpolished but at the very least! At the very least I was going to try!");
+    			t13 = space();
     			div11 = element("div");
     			div10 = element("div");
-    			t15 = text("Into the spring, I self-published a comic compilation to express and get out some feelings I had going through major life changes. Speaking things into existence only makes them more \n      \n        ");
+    			t14 = text("Into the spring, I self-published a comic compilation to express and get out some feelings I had going through major life changes. Speaking things into existence only makes them more \n      \n        ");
     			create_component(highlight4.$$.fragment);
-    			t16 = text("\n        , but it was what I needed to see clearly. It was how I could move forward.");
-    			t17 = space();
+    			t15 = text("\n        , but it was what I needed to see clearly. It was how I could move forward.");
+    			t16 = space();
     			div13 = element("div");
     			div12 = element("div");
-    			t18 = text("Spring was also a chance to share said work with the world, I started posting more on social media and put my comics and zines up at some consignment stores. I didn't expect for a few friends and random people to reach out to me to tell me how much the work resonated with them. How \n        ");
+    			t17 = text("Spring was also a chance to share said work with the world, I started posting more on social media and put my comics and zines up at some consignment stores. I didn't expect for a few friends and random people to reach out to me to tell me how much the work resonated with them. How \n        ");
     			create_component(highlight5.$$.fragment);
-    			t19 = text("\n        it is to be seen for myself as I was!");
-    			t20 = space();
+    			t18 = text("\n        it is to be seen for myself as I was!");
+    			t19 = space();
     			div15 = element("div");
     			div14 = element("div");
-    			t21 = text("Later on, I also got the chance to teach my first workshop at camp, at the end we all made mini 4-8 panel comics and did a small show and tell which was so incredibly heartwarming. I also did an array of experiments for camp under a general theme of \n        ");
+    			t20 = text("Later on, I also got the chance to teach my first workshop at camp, at the end we all made mini 4-8 panel comics and did a small show and tell which was so incredibly heartwarming. I also did an array of experiments for camp under a general theme of \n        ");
     			create_component(highlight6.$$.fragment);
-    			t22 = text("\n        (or more aptly different manifestations of my own yearning).");
-    			t23 = space();
+    			t21 = text("\n        (or more aptly different manifestations of my own yearning).");
+    			t22 = space();
     			div17 = element("div");
     			div16 = element("div");
-    			t24 = text("I started writing as a way to understand the world, not just myself. I'd \n        ");
+    			t23 = text("I started writing as a way to understand the world, not just myself. I'd \n        ");
     			create_component(highlight7.$$.fragment);
-    			t25 = text("\n        articles, quotes, and things from my every day life over a few months in my messenger app, until enough bubbled up into a coherent stream of thoughts. A looser kind of research that was a slow accumulation over time, which felt like a new way of seeing.");
-    			t26 = space();
+    			t24 = text("\n        articles, quotes, and things from my every day life over a few months in my messenger app, until enough bubbled up into a coherent stream of thoughts. A looser kind of research that was a slow accumulation over time, which felt like a new way of seeing.");
+    			t25 = space();
     			div19 = element("div");
     			div18 = element("div");
-    			t27 = text("I rounded off the year with several more ambitious software projects simmering in my brain, to only \n        ");
+    			t26 = text("I rounded off the year with several more ambitious software projects simmering in my brain, to only \n        ");
     			create_component(highlight8.$$.fragment);
-    			t28 = text("\n        with other random life events (moving, getting sick, work) which left only scattered time to dedicate to them and some major skill issues where I didn't know how exactly to develop them or start.");
-    			t29 = space();
+    			t27 = text("\n        with other random life events (moving, getting sick, work) which left only scattered time to dedicate to them and some major skill issues where I didn't know how exactly to develop them or start.");
+    			t28 = space();
     			div21 = element("div");
     			div20 = element("div");
-    			t30 = text("As part of practice, I also want to live \n        ");
+    			t29 = text("As part of practice, I also want to live \n        ");
     			create_component(highlight9.$$.fragment);
-    			t31 = text("\n        Instead of spending so much time trying to predict the future and analyze what the \"right thing\" to do, I want to let go of expectation and be guided from what stirs within me.");
-    			t32 = space();
+    			t30 = text("\n        Instead of spending so much time trying to predict the future and analyze what the \"right thing\" to do, I want to let go of expectation and be guided from what stirs within me.");
+    			t31 = space();
     			div23 = element("div");
     			div22 = element("div");
-    			t33 = text("The past year I felt like I had lived in a way that was markedly different from how I spent the four before that. At the end of this year I read \n        \n        ");
+    			t32 = text("The past year I felt like I had lived in a way that was markedly different from how I spent the four before that. At the end of this year I read \n        \n        ");
     			create_component(highlight10.$$.fragment);
-    			t34 = text("\n         and felt a deja vu for a fair share of the book. I had not done that much, but I had done something at the very least, I moved forward.");
-    			t35 = space();
+    			t33 = text("\n         and felt a deja vu for a fair share of the book. I had not done that much, but I had done something at the very least, I moved forward.");
+    			t34 = space();
     			div25 = element("div");
     			div24 = element("div");
-    			t36 = text("When I first graduated I didn't really know what I wanted to do. The most I could articulate was a vague desire to maybe illustrate some things and sell it at an art fair. I sold at a few this year with the help of friends who had \n        ");
+    			t35 = text("When I first graduated I didn't really know what I wanted to do. The most I could articulate was a vague desire to maybe illustrate some things and sell it at an art fair. I sold at a few this year with the help of friends who had \n        ");
     			create_component(highlight11.$$.fragment);
-    			t37 = text("\n         on their table, and even \n         ");
+    			t36 = text("\n         on their table, and even \n         ");
     			create_component(highlight12.$$.fragment);
-    			t38 = text("\n          with friends at the very end of the year! I can understand it more clearly, it wasn't the act of selling at a fair really, it was being able to connect with others over creativity as a way to interact with the world. And it didn't have to be at a fair even, just passing conversations on the train, at a chance encounter, on the interwebs, anywhere and anytime at all was more than enough for me. I'm so grateful to everyone I've met, and have yet to meet!");
-    			t39 = space();
+    			t37 = text("\n          with friends at the very end of the year! I can understand it more clearly, it wasn't the act of selling at a fair really, it was being able to connect with others over creativity as a way to interact with the world. And it didn't have to be at a fair even, just passing conversations on the train, at a chance encounter, on the interwebs, anywhere and anytime at all was more than enough for me. I'm so grateful to everyone I've met, and have yet to meet!");
+    			t38 = space();
     			div27 = element("div");
     			div26 = element("div");
     			p1 = element("p");
-    			t40 = text("Thanks for reading! You can read more of my writing ");
+    			t39 = text("Thanks for reading! You can read more of my writing ");
     			a = element("a");
     			a.textContent = "here";
-    			t42 = text("!");
-    			attr_dev(div0, "class", "column-content svelte-1f169f6");
-    			add_location(div0, file, 87, 4, 2067);
-    			attr_dev(div1, "class", "column svelte-1f169f6");
-    			add_location(div1, file, 86, 2, 2042);
+    			t41 = text("!");
+    			attr_dev(div0, "class", "column-content svelte-17em31r");
+    			add_location(div0, file, 87, 4, 2058);
+    			attr_dev(div1, "class", "column svelte-17em31r");
+    			add_location(div1, file, 86, 2, 2033);
     			set_style(p0, "color", "gray");
-    			add_location(p0, file, 91, 6, 2147);
-    			attr_dev(div2, "class", "column-content svelte-1f169f6");
-    			add_location(div2, file, 92, 6, 2241);
-    			attr_dev(div3, "class", "column svelte-1f169f6");
-    			add_location(div3, file, 90, 4, 2120);
-    			attr_dev(div4, "class", "column-content svelte-1f169f6");
-    			add_location(div4, file, 108, 6, 2961);
-    			attr_dev(div5, "class", "column svelte-1f169f6");
-    			add_location(div5, file, 107, 4, 2934);
-    			attr_dev(div6, "class", "column-content svelte-1f169f6");
-    			add_location(div6, file, 120, 6, 3438);
-    			attr_dev(div7, "class", "column svelte-1f169f6");
-    			add_location(div7, file, 119, 4, 3411);
-    			attr_dev(div8, "class", "column-content svelte-1f169f6");
-    			add_location(div8, file, 133, 6, 4048);
-    			attr_dev(div9, "class", "column svelte-1f169f6");
-    			add_location(div9, file, 132, 4, 4021);
-    			attr_dev(div10, "class", "column-content svelte-1f169f6");
-    			add_location(div10, file, 151, 6, 5288);
-    			attr_dev(div11, "class", "column svelte-1f169f6");
-    			add_location(div11, file, 150, 4, 5261);
-    			attr_dev(div12, "class", "column-content svelte-1f169f6");
-    			add_location(div12, file, 164, 6, 5829);
-    			attr_dev(div13, "class", "column svelte-1f169f6");
-    			add_location(div13, file, 163, 4, 5802);
-    			attr_dev(div14, "class", "column-content svelte-1f169f6");
-    			add_location(div14, file, 176, 6, 6420);
-    			attr_dev(div15, "class", "column svelte-1f169f6");
-    			add_location(div15, file, 175, 4, 6393);
-    			attr_dev(div16, "class", "column-content svelte-1f169f6");
-    			add_location(div16, file, 188, 6, 7256);
-    			attr_dev(div17, "class", "column svelte-1f169f6");
-    			add_location(div17, file, 187, 4, 7229);
-    			attr_dev(div18, "class", "column-content svelte-1f169f6");
-    			add_location(div18, file, 200, 6, 7944);
-    			attr_dev(div19, "class", "column svelte-1f169f6");
-    			add_location(div19, file, 199, 4, 7917);
-    			attr_dev(div20, "class", "column-content svelte-1f169f6");
-    			add_location(div20, file, 211, 6, 8455);
-    			attr_dev(div21, "class", "column svelte-1f169f6");
-    			add_location(div21, file, 210, 4, 8428);
-    			attr_dev(div22, "class", "column-content svelte-1f169f6");
-    			add_location(div22, file, 222, 6, 8885);
-    			attr_dev(div23, "class", "column svelte-1f169f6");
-    			add_location(div23, file, 221, 4, 8858);
-    			attr_dev(div24, "class", "column-content svelte-1f169f6");
-    			add_location(div24, file, 234, 6, 9405);
-    			attr_dev(div25, "class", "column svelte-1f169f6");
-    			add_location(div25, file, 233, 4, 9378);
+    			add_location(p0, file, 92, 8, 2175);
+    			attr_dev(div2, "class", "column-content svelte-17em31r");
+    			add_location(div2, file, 91, 6, 2138);
+    			attr_dev(div3, "class", "column svelte-17em31r");
+    			add_location(div3, file, 90, 4, 2111);
+    			attr_dev(div4, "class", "column-content svelte-17em31r");
+    			add_location(div4, file, 108, 6, 2954);
+    			attr_dev(div5, "class", "column svelte-17em31r");
+    			add_location(div5, file, 107, 4, 2927);
+    			attr_dev(div6, "class", "column-content svelte-17em31r");
+    			add_location(div6, file, 120, 6, 3431);
+    			attr_dev(div7, "class", "column svelte-17em31r");
+    			add_location(div7, file, 119, 4, 3404);
+    			attr_dev(div8, "class", "column-content svelte-17em31r");
+    			add_location(div8, file, 133, 6, 4041);
+    			attr_dev(div9, "class", "column svelte-17em31r");
+    			add_location(div9, file, 132, 4, 4014);
+    			attr_dev(div10, "class", "column-content svelte-17em31r");
+    			add_location(div10, file, 151, 6, 5281);
+    			attr_dev(div11, "class", "column svelte-17em31r");
+    			add_location(div11, file, 150, 4, 5254);
+    			attr_dev(div12, "class", "column-content svelte-17em31r");
+    			add_location(div12, file, 164, 6, 5822);
+    			attr_dev(div13, "class", "column svelte-17em31r");
+    			add_location(div13, file, 163, 4, 5795);
+    			attr_dev(div14, "class", "column-content svelte-17em31r");
+    			add_location(div14, file, 176, 6, 6413);
+    			attr_dev(div15, "class", "column svelte-17em31r");
+    			add_location(div15, file, 175, 4, 6386);
+    			attr_dev(div16, "class", "column-content svelte-17em31r");
+    			add_location(div16, file, 188, 6, 7249);
+    			attr_dev(div17, "class", "column svelte-17em31r");
+    			add_location(div17, file, 187, 4, 7222);
+    			attr_dev(div18, "class", "column-content svelte-17em31r");
+    			add_location(div18, file, 200, 6, 7937);
+    			attr_dev(div19, "class", "column svelte-17em31r");
+    			add_location(div19, file, 199, 4, 7910);
+    			attr_dev(div20, "class", "column-content svelte-17em31r");
+    			add_location(div20, file, 211, 6, 8448);
+    			attr_dev(div21, "class", "column svelte-17em31r");
+    			add_location(div21, file, 210, 4, 8421);
+    			attr_dev(div22, "class", "column-content svelte-17em31r");
+    			add_location(div22, file, 222, 6, 8878);
+    			attr_dev(div23, "class", "column svelte-17em31r");
+    			add_location(div23, file, 221, 4, 8851);
+    			attr_dev(div24, "class", "column-content svelte-17em31r");
+    			add_location(div24, file, 234, 6, 9398);
+    			attr_dev(div25, "class", "column svelte-17em31r");
+    			add_location(div25, file, 233, 4, 9371);
     			attr_dev(a, "href", "https://corny.substack.com");
-    			add_location(a, file, 256, 62, 10624);
-    			add_location(p1, file, 255, 8, 10558);
-    			attr_dev(div26, "class", "column-content svelte-1f169f6");
-    			add_location(div26, file, 254, 6, 10521);
-    			attr_dev(div27, "class", "column svelte-1f169f6");
-    			add_location(div27, file, 253, 4, 10494);
-    			attr_dev(div28, "class", "content-container svelte-1f169f6");
-    			add_location(div28, file, 82, 2, 1970);
-    			attr_dev(div29, "class", "scroll-container svelte-1f169f6");
-    			add_location(div29, file, 80, 0, 1896);
+    			add_location(a, file, 256, 62, 10617);
+    			add_location(p1, file, 255, 8, 10551);
+    			attr_dev(div26, "class", "column-content svelte-17em31r");
+    			add_location(div26, file, 254, 6, 10514);
+    			attr_dev(div27, "class", "column svelte-17em31r");
+    			add_location(div27, file, 253, 4, 10487);
+    			attr_dev(div28, "class", "content-container svelte-17em31r");
+    			add_location(div28, file, 82, 2, 1961);
+    			attr_dev(div29, "class", "scroll-container svelte-17em31r");
+    			add_location(div29, file, 80, 0, 1887);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1063,87 +1087,86 @@ var app = (function () {
     			append_dev(div1, div0);
     			append_dev(div28, t0);
     			append_dev(div28, div3);
-    			append_dev(div3, p0);
-    			append_dev(div3, t2);
     			append_dev(div3, div2);
-    			append_dev(div2, t3);
+    			append_dev(div2, p0);
+    			append_dev(div2, t2);
     			mount_component(highlight0, div2, null);
-    			append_dev(div2, t4);
-    			append_dev(div28, t5);
+    			append_dev(div2, t3);
+    			append_dev(div28, t4);
     			append_dev(div28, div5);
     			append_dev(div5, div4);
-    			append_dev(div4, t6);
+    			append_dev(div4, t5);
     			mount_component(highlight1, div4, null);
-    			append_dev(div4, t7);
-    			append_dev(div28, t8);
+    			append_dev(div4, t6);
+    			append_dev(div28, t7);
     			append_dev(div28, div7);
     			append_dev(div7, div6);
-    			append_dev(div6, t9);
+    			append_dev(div6, t8);
     			mount_component(highlight2, div6, null);
-    			append_dev(div6, t10);
-    			append_dev(div28, t11);
+    			append_dev(div6, t9);
+    			append_dev(div28, t10);
     			append_dev(div28, div9);
     			append_dev(div9, div8);
-    			append_dev(div8, t12);
+    			append_dev(div8, t11);
     			mount_component(highlight3, div8, null);
-    			append_dev(div8, t13);
-    			append_dev(div28, t14);
+    			append_dev(div8, t12);
+    			append_dev(div28, t13);
     			append_dev(div28, div11);
     			append_dev(div11, div10);
-    			append_dev(div10, t15);
+    			append_dev(div10, t14);
     			mount_component(highlight4, div10, null);
-    			append_dev(div10, t16);
-    			append_dev(div28, t17);
+    			append_dev(div10, t15);
+    			append_dev(div28, t16);
     			append_dev(div28, div13);
     			append_dev(div13, div12);
-    			append_dev(div12, t18);
+    			append_dev(div12, t17);
     			mount_component(highlight5, div12, null);
-    			append_dev(div12, t19);
-    			append_dev(div28, t20);
+    			append_dev(div12, t18);
+    			append_dev(div28, t19);
     			append_dev(div28, div15);
     			append_dev(div15, div14);
-    			append_dev(div14, t21);
+    			append_dev(div14, t20);
     			mount_component(highlight6, div14, null);
-    			append_dev(div14, t22);
-    			append_dev(div28, t23);
+    			append_dev(div14, t21);
+    			append_dev(div28, t22);
     			append_dev(div28, div17);
     			append_dev(div17, div16);
-    			append_dev(div16, t24);
+    			append_dev(div16, t23);
     			mount_component(highlight7, div16, null);
-    			append_dev(div16, t25);
-    			append_dev(div28, t26);
+    			append_dev(div16, t24);
+    			append_dev(div28, t25);
     			append_dev(div28, div19);
     			append_dev(div19, div18);
-    			append_dev(div18, t27);
+    			append_dev(div18, t26);
     			mount_component(highlight8, div18, null);
-    			append_dev(div18, t28);
-    			append_dev(div28, t29);
+    			append_dev(div18, t27);
+    			append_dev(div28, t28);
     			append_dev(div28, div21);
     			append_dev(div21, div20);
-    			append_dev(div20, t30);
+    			append_dev(div20, t29);
     			mount_component(highlight9, div20, null);
-    			append_dev(div20, t31);
-    			append_dev(div28, t32);
+    			append_dev(div20, t30);
+    			append_dev(div28, t31);
     			append_dev(div28, div23);
     			append_dev(div23, div22);
-    			append_dev(div22, t33);
+    			append_dev(div22, t32);
     			mount_component(highlight10, div22, null);
-    			append_dev(div22, t34);
-    			append_dev(div28, t35);
+    			append_dev(div22, t33);
+    			append_dev(div28, t34);
     			append_dev(div28, div25);
     			append_dev(div25, div24);
-    			append_dev(div24, t36);
+    			append_dev(div24, t35);
     			mount_component(highlight11, div24, null);
-    			append_dev(div24, t37);
+    			append_dev(div24, t36);
     			mount_component(highlight12, div24, null);
-    			append_dev(div24, t38);
-    			append_dev(div28, t39);
+    			append_dev(div24, t37);
+    			append_dev(div28, t38);
     			append_dev(div28, div27);
     			append_dev(div27, div26);
     			append_dev(div26, p1);
-    			append_dev(p1, t40);
+    			append_dev(p1, t39);
     			append_dev(p1, a);
-    			append_dev(p1, t42);
+    			append_dev(p1, t41);
     			/*div28_binding*/ ctx[1](div28);
     			current = true;
     		},

@@ -48,17 +48,17 @@
     text-align: justify;
     line-height: 1.6;
     font-size: 20px;
-    filter: blur(4px);
-    transition: filter 0.3s ease, color 0.3s ease;
     position: relative;
     min-height: 100vh;
   }
-  .column:hover{
+  .column-content:hover{
     filter: blur(0px);
     transition-duration: 1s;
   }
 
   .column-content {
+    filter: blur(4px);
+    transition: filter 0.3s ease;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -89,8 +89,8 @@
     </div>
   </div>
     <div class="column">
-      <p style="color:gray;">Please click on this webpage once to enable the audio effect</p>
       <div class="column-content">
+        <p style="color:gray;">Please click on this webpage once to enable the audio effect</p>
         One night I found myself 
         <Highlight 
           text="listening" 
