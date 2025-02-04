@@ -3,7 +3,8 @@
   export let imageUrl = 'https://picsum.photos/1200/801'; 
   export let color = 'inherit';
   export let hoverText = '';
-  
+  export let audioUrl = '';
+
   let audio;
 
   function handleMouseEnter(event) {
