@@ -1,8 +1,7 @@
 <script>
   export let text;
-  export let imageUrl = 'https://picsum.photos/1200/801'; // default for testing
+  export let imageUrl = 'https://picsum.photos/1200/801'; 
   export let color = 'inherit';
-  export let audioUrl = ''; // New prop for Spotify preview URL
   export let hoverText = '';
   
   let audio;
@@ -16,7 +15,6 @@
       column.style.color = color;
     }
     
-    // Create tooltip in column-content
     if (hoverText && columnContent && !document.querySelector('.tooltip-content')) {
       const tooltip = document.createElement('div');
       tooltip.className = 'tooltip-content';
@@ -36,7 +34,6 @@
     if (column) {
       column.style.color = 'black';
     }
-    // Remove tooltip
     const tooltip = document.querySelector('.tooltip-content');
     if (tooltip) {
       tooltip.remove();
@@ -66,11 +63,11 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;  /* This keeps the background fixed while scrolling */
-    min-height: 100vh;  /* Ensure body takes up full viewport height */
+    background-attachment: fixed;  
+    min-height: 100vh;  
     transition: background-image 0.3s ease;
-    margin: 0;  /* Remove default margin */
-    padding: 0;  /* Remove default padding */
+    margin: 0;  
+    padding: 0; 
   }
 
   :global(.column) {
@@ -88,7 +85,7 @@
     border-radius: 4px;
     transition: opacity 0.3s ease;
     white-space: wrap;
-    margin-top: 10px;  /* Space between text and tooltip */
+    margin-top: 10px;  
     z-index: 100;     
     font-size: 0.8em;
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;

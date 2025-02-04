@@ -1,6 +1,5 @@
 <script>
   import Highlight from './components/Highlight.svelte';
-  // import Open from './components/Open.svelte';
   import { onMount } from 'svelte';
   const imageUrl = "https://cdn.prod.website-files.com/63531edd0af27d6d2cbf16b1/639a61119783921581253241_design-challenges.webp"; // Replace with your image URL
 
@@ -46,7 +45,6 @@
     flex-shrink: 0;
     padding: 20px;
     margin-right: 60px;
-    /* border: 1px solid red; */
     text-align: justify;
     line-height: 1.6;
     font-size: 20px;
@@ -105,7 +103,6 @@
         to the looping bass, the loose melody and voice of the singer, I felt an indescribable feeling wash over me. 
         Eyes soft, imperceptibly so, reaching for something just beyond my fingertips.
       </div>
-      <!-- The tooltip will be injected here -->
     </div>
 
     <div class="column">
