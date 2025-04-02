@@ -64,6 +64,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: calc(100% - 40px);
+    letter-spacing: -0.8px;
+    word-spacing: -0.8px;
   }
 
   :global(body) {
@@ -75,6 +77,10 @@
 
   .column {
     scroll-snap-align: start;
+  }
+  p{
+    letter-spacing: -0.5px;
+    font-size: 0.8em;
   }
 </style>
 
@@ -99,7 +105,7 @@
           audioUrl="/removethedefender.mov"
           hoverText="remove the defender by Yaktus; if you don't hear anything, click on the webpage and hover again"
         />
-        to a song from a college indie band whose concert I attended at the basement of the co-op next to mine. 
+        to a song from a college indie band whose concert I attended at the basement of the co-op next to mine. Listening
         to the looping bass, the loose melody and voice of the singer, I felt an indescribable feeling wash over me. 
         Eyes soft, imperceptibly so, reaching for something just beyond my fingertips.
       </div>
